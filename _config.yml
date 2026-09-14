@@ -1,8 +1,8 @@
 title: "۳۶۵وب"
 tagline: "ارائه خدمات هاست، دامنه و طراحی سایت"
 description: "۳۶۵وب ارائه‌دهنده میزبانی وب پرسرعت سی‌پنل و سایبرپنل ایران و آلمان، سرور ابری، ثبت آنی دامنه و طراحی سایت."
-url: "https://alireza12186.github.io"
-baseurl: "/365web"
+url: "https://git.alirezak.ir"
+baseurl: ""
 lang: "fa"
 direction: "rtl"
 permalink: /:slug/
