@@ -1,0 +1,36 @@
+- name: "شرکت توان برتر پارسیان"
+  logo: "client1.png"
+  url: "#"
+
+- name: "مجتمع آموزشی دانش"
+  logo: "client2.png"
+  url: "#"
+
+- name: "مجتمع آموزشی نویدصالحین"
+  logo: "client3.png"
+  url: "#"
+
+- name: "هیراد مدیکال"
+  logo: "client4.png"
+  url: "#"
+
+- name: "انجمن کتابداری ایران"
+  logo: "client5.png"
+  url: "#"
+
+- name: "موتور جستجوی رادیولوژی"
+  logo: "client6.png"
+  url: "#"
+
+- name: "دانشنامه ملل"
+  logo: "client7.png"
+  url: "#"
+
+- name: "دانشنامه ایران"
+  logo: "client8.png"
+  url: "#"
+
+- name: "ویکی آزادگان"
+  logo: "client9.png"
+  url: "#"
+

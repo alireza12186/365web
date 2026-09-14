@@ -1,0 +1,371 @@
+---
+layout: default
+---
+
+<article class="single-post-wrapper">
+  
+  <div class="post-header-section">
+    <div class="container" style="max-width: 860px;">
+      <div class="post-meta-top">
+        {% if page.categories.first %}
+          <span class="post-category-badge">{{ page.categories.first }}</span>
+        {% endif %}
+        <span class="post-date jdate" data-gdate="{{ page.date | date: '%Y-%m-%d' }}">{{ page.date | date: "%Y/%m/%d" }}</span>
+      </div>
+      <h1 class="post-title">{{ page.title }}</h1>
+    </div>
+  </div>
+
+  <div class="container" style="max-width: 860px; padding-top: 35px; padding-bottom: 60px;">
+    {% if page.image %}
+      <div class="post-featured-image">
+        <img src="{{ page.image | relative_url }}" alt="{{ page.title }}" loading="lazy">
+      </div>
+    {% endif %}
+
+    <div class="post-content">
+      {{ content }}
+    </div>
+
+    <!-- برچسب‌ها و دکمه دسته‌بندی‌ها -->
+    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--border);">
+      <div class="post-tags-container" style="margin-top: 0; padding-top: 0; border-top: none;">
+        {% if page.tags.size > 0 %}
+          <span style="font-weight: 700; color: var(--brand-navy); font-size: 0.9rem;">برچسب‌ها:</span>
+          {% for tag in page.tags %}
+            <span class="post-tag-item">#{{ tag }}</span>
+          {% endfor %}
+        {% endif %}
+      </div>
+      <div>
+        <a href="{{ '/categories/' | relative_url }}" style="font-size: 0.88rem; font-weight: 700; color: var(--brand-navy); background: #f1f5f9; padding: 6px 14px; border-radius: 8px; border: 1px solid var(--border); display: inline-flex; align-items: center; gap: 6px; text-decoration: none;" onmouseover="this.style.borderColor='var(--brand-red)'; this.style.color='var(--brand-red)'" onmouseout="this.style.borderColor='var(--border)'; this.style.color='var(--brand-navy)'">
+          📁 مشاهده همه موضوعات وبلاگ ←
+        </a>
+      </div>
+    </div>
+
+    <div class="post-cta-box">
+      <div class="cta-text">
+        <h4 style="color: var(--brand-navy); font-size: 1.15rem; margin-bottom: 6px;">به میزبانی پرسرعت و پایدار نیاز دارید؟</h4>
+        <p style="color: var(--text-muted); font-size: 0.9rem; margin: 0;">سایت خود را روی هاست‌های ابری NVMe ۳۶۵وب با وب‌سرور لایت‌اسپید میزبانی کنید.</p>
+      </div>
+      <a href="{{ '/linux-cpanel-hosting/' | relative_url }}" class="btn btn-primary" style="white-space: nowrap;">مشاهده پلن‌های هاست</a>
+    </div>
+
+  </div>
+
+  <section class="related-posts-section">
+    <div class="container" style="max-width: 960px;">
+      <div class="section-header" style="margin-bottom: 35px; text-align: center;">
+        <h2>مطالب مرتبط و پیشنهادی</h2>
+        <p>شاید این مقالات نیز برای شما مفید و خواندنی باشند</p>
+      </div>
+
+      <div class="related-posts-grid">
+        {% assign max_related = 3 %}
+        {% assign count = 0 %}
+
+        {% for post in site.posts %}
+          {% if post.url != page.url %}
+            {% assign same_tag = false %}
+            {% for tag in post.tags %}
+              {% if page.tags contains tag %}
+                {% assign same_tag = true %}
+              {% endif %}
+            {% endfor %}
+
+            {% if same_tag %}
+              <div class="blog-card">
+                <div class="blog-thumbnail">
+                  {% if post.image %}
+                    <img src="{{ post.image | relative_url }}" alt="{{ post.title }}" loading="lazy">
+                  {% else %}
+                    <span style="font-size: 2.5rem;">📄</span>
+                  {% endif %}
+                </div>
+                <div class="blog-body">
+                  <span class="blog-meta jdate" data-gdate="{{ post.date | date: '%Y-%m-%d' }}">{{ post.date | date: "%Y/%m/%d" }}</span>
+                  <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
+                  <a href="{{ post.url | relative_url }}" class="blog-link">مطالعه مقاله ←</a>
+                </div>
+              </div>
+              {% assign count = count | plus: 1 %}
+              {% if count >= max_related %}{% break %}{% endif %}
+            {% endif %}
+          {% endif %}
+        {% endfor %}
+
+        {% if count < max_related %}
+          {% for post in site.posts %}
+            {% if post.url != page.url %}
+              {% assign same_tag = false %}
+              {% for tag in post.tags %}
+                {% if page.tags contains tag %}
+                  {% assign same_tag = true %}
+                {% endif %}
+              {% endfor %}
+
+              {% unless same_tag %}
+                <div class="blog-card">
+                  <div class="blog-thumbnail">
+                    {% if post.image %}
+                      <img src="{{ post.image | relative_url }}" alt="{{ post.title }}" loading="lazy">
+                    {% else %}
+                      <span style="font-size: 2.5rem;">📄</span>
+                    {% endif %}
+                  </div>
+                  <div class="blog-body">
+                    <span class="blog-meta jdate" data-gdate="{{ post.date | date: '%Y-%m-%d' }}">{{ post.date | date: "%Y/%m/%d" }}</span>
+                    <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
+                    <a href="{{ post.url | relative_url }}" class="blog-link">مطالعه مقاله ←</a>
+                  </div>
+                </div>
+                {% assign count = count | plus: 1 %}
+                {% if count >= max_related %}{% break %}{% endif %}
+              {% endunless %}
+            {% endif %}
+          {% endfor %}
+        {% endif %}
+
+      </div>
+    </div>
+  </section>
+
+</article>
+
+<style>
+  .post-header-section {
+    position: relative !important;
+    top: auto !important;
+    z-index: 1 !important;
+    padding: 60px 0 35px;
+    background: radial-gradient(circle at top right, #fff1f2 0%, #f1f4fc 60%, #ffffff 100%);
+    border-bottom: 1px solid var(--border);
+    text-align: center;
+  }
+
+  .post-meta-top {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 15px;
+    font-size: 0.85rem;
+  }
+
+  .post-category-badge {
+    background: #fee2e2;
+    color: var(--brand-red);
+    padding: 3px 14px;
+    border-radius: 20px;
+    font-weight: 700;
+  }
+
+  .post-date {
+    color: var(--text-muted);
+  }
+
+  .post-title {
+    font-size: 2.1rem;
+    line-height: 1.45;
+    color: var(--brand-navy);
+  }
+
+  .post-featured-image {
+    width: 100%;
+    max-height: 420px;
+    border-radius: var(--radius);
+    overflow: hidden;
+    margin-bottom: 35px;
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .post-featured-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .post-content {
+    font-size: 1.05rem;
+    line-height: 2.1;
+    color: #334155;
+  }
+
+  .post-content p {
+    margin-bottom: 22px;
+  }
+
+  .post-content h2 {
+    font-size: 1.55rem;
+    margin: 40px 0 16px;
+    color: var(--brand-navy);
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .post-content h3 {
+    font-size: 1.3rem;
+    margin: 30px 0 14px;
+    color: var(--brand-navy);
+  }
+
+  .post-content ul, .post-content ol {
+    padding-right: 25px;
+    margin-bottom: 24px;
+  }
+
+  .post-content li {
+    margin-bottom: 8px;
+  }
+
+  .post-content a {
+    color: var(--brand-red);
+    font-weight: 600;
+    text-decoration: underline;
+  }
+
+  .post-content img {
+    max-width: 100%;
+    border-radius: 10px;
+    margin: 20px auto;
+    display: block;
+  }
+
+  .post-content blockquote {
+    background: #f8fafc;
+    border-right: 4px solid var(--brand-red);
+    padding: 16px 20px;
+    margin: 24px 0;
+    border-radius: 6px;
+    color: #475569;
+    font-style: italic;
+  }
+
+  .post-content pre {
+    direction: ltr;
+    text-align: left;
+    background: #0f172a;
+    color: #f8fafc;
+    padding: 18px;
+    border-radius: 10px;
+    overflow-x: auto;
+    margin: 24px 0;
+    font-family: monospace;
+    font-size: 0.9rem;
+  }
+
+  .post-content code {
+    background: transparent;
+    color: #ffffff;
+    padding: 2px 6px;
+    font-family: monospace;
+  }
+
+  .post-tags-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .post-tag-item {
+    background: #f1f5f9;
+    color: var(--text-muted);
+    font-size: 0.82rem;
+    padding: 3px 12px;
+    border-radius: 20px;
+    font-weight: 600;
+  }
+
+  .post-cta-box {
+    margin-top: 40px;
+    background: #ffffff;
+    border: 2px dashed #fca5a5;
+    border-radius: var(--radius);
+    padding: 24px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 18px;
+  }
+
+  .related-posts-section {
+    background: #ffffff;
+    padding: 60px 0;
+    border-top: 1px solid var(--border);
+  }
+
+  .related-posts-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+  }
+
+  @media (max-width: 900px) {
+    .related-posts-grid {
+      grid-template-columns: 1fr !important;
+      gap: 20px;
+    }
+    .post-title {
+      font-size: 1.55rem;
+    }
+  }
+</style>
+
+<script>
+  (function() {
+    function gregorianToJalali(gy, gm, gd) {
+      var g_d_m = [0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334];
+      var jy = (gy <= 1600) ? 0 : 979;
+      gy -= (gy <= 1600) ? 621 : 1600;
+      var gy2 = (gm > 2) ? (gy + 1) : gy;
+      var days = (365 * gy) + parseInt((gy2 + 3) / 4) - parseInt((gy2 + 99) / 100) + parseInt((gy2 + 399) / 400) - 80 + gd + g_d_m[gm - 1];
+      jy += 33 * parseInt(days / 12053);
+      days %= 12053;
+      jy += 4 * parseInt(days / 1461);
+      days %= 1461;
+      jy += parseInt((days - 1) / 365);
+      if (days > 0) days = (days - 1) % 365;
+      var jm = (days < 186) ? 1 + parseInt(days / 31) : 7 + parseInt((days - 186) / 30);
+      var jd = 1 + ((days < 186) ? (days % 31) : ((days - 186) % 30));
+      
+      var months = ['فروردین', 'اردیبهشت', 'خرداد', 'تیر', 'مرداد', 'شهریور', 'مهر', 'آبان', 'آذر', 'دی', 'بهمن', 'اسفند'];
+      
+      function toFa(num) {
+        return num.toString().replace(/\d/g, function(d) {
+          return '۰۱۲۳۴۵۶۷۸۹'[d];
+        });
+      }
+      
+      return toFa(jd) + ' ' + months[jm - 1] + ' ' + toFa(jy);
+    }
+
+    function convertDates() {
+      var elements = document.querySelectorAll('.jdate');
+      elements.forEach(function(el) {
+        var gdate = el.getAttribute('data-gdate');
+        if (gdate) {
+          var p = gdate.split('-');
+          if (p.length === 3) {
+            var gy = parseInt(p[0], 10);
+            var gm = parseInt(p[1], 10);
+            var gd = parseInt(p[2], 10);
+            if (!isNaN(gy) && !isNaN(gm) && !isNaN(gd)) {
+              el.textContent = gregorianToJalali(gy, gm, gd);
+            }
+          }
+        }
+      });
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', convertDates);
+    } else {
+      convertDates();
+    }
+  })();
+</script>

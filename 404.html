@@ -1,0 +1,90 @@
+---
+layout: default
+title: "صفحه مورد نظر یافت نشد (خطای ۴۰۴)"
+permalink: /404.html
+sitemap: false
+robots: noindex, follow
+---
+
+<section style="background: radial-gradient(circle at top right, #fff1f2 0%, #f1f4fc 60%, #ffffff 100%); padding: 70px 0 50px; border-bottom: 1px solid var(--border); text-align: center;">
+  <div class="container" style="max-width: 760px;">
+    
+    <div style="font-size: 5.5rem; font-weight: 900; color: var(--brand-red); line-height: 1; margin-bottom: 10px; font-family: 'KalamehBlack', 'Vazirmatn', sans-serif;">
+      ۴۰۴
+    </div>
+    
+    <h1 style="font-size: 2rem; color: var(--brand-navy); margin-bottom: 15px;">
+      صفحه‌ای که به دنبال آن بودید، پیدا نشد!
+    </h1>
+    
+    <p style="color: var(--text-muted); font-size: 1.05rem; line-height: 1.85; margin-bottom: 30px;">
+      ممکن است آدرس وارد شده تغییر کرده، حذف شده باشد یا در تایپ نشانی اشتباهی رخ داده باشد. پیشنهاد می‌کنیم از بخش‌های زیر استفاده کنید:
+    </p>
+
+    <div style="display: flex; justify-content: center; gap: 12px; flex-wrap: wrap;">
+      <a href="{{ '/' | relative_url }}" class="btn btn-primary" style="padding: 10px 24px; font-size: 0.95rem;">
+        بازگشت به صفحه اصلی
+      </a>
+      <button onclick="document.getElementById('openSearchBtn')?.click();" class="btn" style="background: #ffffff; border: 1px solid var(--border); color: var(--brand-navy); padding: 10px 20px; font-size: 0.95rem; cursor: pointer; border-radius: 8px;">
+        🔍 جستجو در سایت
+      </button>
+    </div>
+
+  </div>
+</section>
+
+<section style="padding: 60px 0; background: #f8fafc;">
+  <div class="container" style="max-width: 900px;">
+    
+    <h2 style="font-size: 1.35rem; color: var(--brand-navy); text-align: center; margin-bottom: 30px;">
+      بخش‌های پربازدید و خدمات ۳۶۵وب
+    </h2>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px;">
+      
+      <!-- هاست لینوکس -->
+      <a href="{{ '/linux-cpanel-hosting/' | relative_url }}" style="background: #ffffff; border: 1px solid var(--border); border-radius: var(--radius); padding: 22px; text-decoration: none; transition: transform 0.2s, box-shadow 0.2s; display: block; box-shadow: var(--shadow-sm);" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform='translateY(0)'">
+        <div style="font-size: 1.8rem; margin-bottom: 8px;">⚡</div>
+        <h3 style="font-size: 1.1rem; color: var(--brand-navy); margin-bottom: 6px;">هاست ابری cPanel</h3>
+        <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.7; margin: 0;">میزبانی ابری با هارد NVMe و وب‌سرور پرسرعت LiteSpeed</p>
+      </a>
+
+      <!-- هاست ایمیل -->
+      <a href="{{ '/email-hosting/' | relative_url }}" style="background: #ffffff; border: 1px solid var(--border); border-radius: var(--radius); padding: 22px; text-decoration: none; transition: transform 0.2s, box-shadow 0.2s; display: block; box-shadow: var(--shadow-sm);" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform='translateY(0)'">
+        <div style="font-size: 1.8rem; margin-bottom: 8px;">✉️</div>
+        <h3 style="font-size: 1.1rem; color: var(--brand-navy); margin-bottom: 6px;">هاست ایمیل شرکتی</h3>
+        <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.7; margin: 0;">سرویس اختصاصی مکاتبات رسمی بر پایه نام دامنه سازمانی</p>
+      </a>
+
+      <!-- ثبت دامنه -->
+      <a href="{{ '/domain/' | relative_url }}" style="background: #ffffff; border: 1px solid var(--border); border-radius: var(--radius); padding: 22px; text-decoration: none; transition: transform 0.2s, box-shadow 0.2s; display: block; box-shadow: var(--shadow-sm);" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform='translateY(0)'">
+        <div style="font-size: 1.8rem; margin-bottom: 8px;">🌐</div>
+        <h3 style="font-size: 1.1rem; color: var(--brand-navy); margin-bottom: 6px;">ثبت و انتقال دامنه</h3>
+        <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.7; margin: 0;">جستجو و ثبت آنی پسوندهای ملی (.ir) و بین‌المللی</p>
+      </a>
+
+      <!-- وبلاگ و آموزش‌ها -->
+      <a href="{{ '/blog/' | relative_url }}" style="background: #ffffff; border: 1px solid var(--border); border-radius: var(--radius); padding: 22px; text-decoration: none; transition: transform 0.2s, box-shadow 0.2s; display: block; box-shadow: var(--shadow-sm);" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform='translateY(0)'">
+        <div style="font-size: 1.8rem; margin-bottom: 8px;">📚</div>
+        <h3 style="font-size: 1.1rem; color: var(--brand-navy); margin-bottom: 6px;">وبلاگ و آموزش‌ها</h3>
+        <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.7; margin: 0;">مطالعه مقالات، راهنماها و ترفندهای دنیای وب و هاستینگ</p>
+      </a>
+
+      <!-- دسته‌بندی موضوعی -->
+      <a href="{{ '/categories/' | relative_url }}" style="background: #ffffff; border: 1px solid var(--border); border-radius: var(--radius); padding: 22px; text-decoration: none; transition: transform 0.2s, box-shadow 0.2s; display: block; box-shadow: var(--shadow-sm);" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform='translateY(0)'">
+        <div style="font-size: 1.8rem; margin-bottom: 8px;">📁</div>
+        <h3 style="font-size: 1.1rem; color: var(--brand-navy); margin-bottom: 6px;">موضوعات مقالات</h3>
+        <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.7; margin: 0;">دسترسی سریع به دسته‌بندی‌ها و آرشیو کامل موضوعی</p>
+      </a>
+
+      <!-- پرتال پشتیبانی -->
+      <a href="https://my.365web.ir" target="_blank" rel="noopener" style="background: #ffffff; border: 1px solid var(--border); border-radius: var(--radius); padding: 22px; text-decoration: none; transition: transform 0.2s, box-shadow 0.2s; display: block; box-shadow: var(--shadow-sm);" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform='translateY(0)'">
+        <div style="font-size: 1.8rem; margin-bottom: 8px;">🎧</div>
+        <h3 style="font-size: 1.1rem; color: var(--brand-navy); margin-bottom: 6px;">پشتیبانی و پرتال کاربران</h3>
+        <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.7; margin: 0;">ورود به حساب کاربری، تیکت پشتیبانی و پرداخت فاکتور</p>
+      </a>
+
+    </div>
+
+  </div>
+</section>

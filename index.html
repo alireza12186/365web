@@ -1,0 +1,155 @@
+---
+layout: default
+title: "خانه"
+---
+
+<!-- هیرو و جستجوی دامنه متصل به WHMCS -->
+<section class="hero" id="domain">
+  <div class="container hero-container">
+    <div class="hero-content">
+      <h1>نگران وبسایت یا سرور خود نباشید.<br>همه حواس ما پیش شماست!</h1>
+      <p>۳۶۵وب با سال‌ها تجربه آماده کمک به شما برای ساخت و راه‌اندازی وبسایت یا سرور شماست. ما تمام مراحل از ثبت دامنه، پیکربندی هاست تا مدیریت و پشتیبانی فنی را به عهده می‌گیریم.</p>
+
+      <form class="domain-search" action="https://my.365web.ir/cart.php?a=add&domain=register" method="POST">
+        <input type="text" name="query" placeholder="دامنه مورد نظر خود را جستجو کنید (مثلا: mysite.ir)" required autocomplete="off">
+        <button type="submit" class="btn btn-primary">جستجوی دامنه</button>
+      </form>
+
+      <div class="tlds-list">
+        <span>.ir</span>
+        <span>.com</span>
+        <span>.net</span>
+        <span>.org</span>
+      </div>
+    </div>
+
+    <div class="hero-graphic" aria-hidden="true">
+      <svg viewBox="0 0 500 340" fill="none">
+        <rect x="70" y="40" width="360" height="260" rx="16" fill="#ffffff" stroke="#fecaca" stroke-width="3"/>
+        <rect x="100" y="75" width="300" height="45" rx="8" fill="#fff1f2" stroke="#e62e38" stroke-width="2"/>
+        <circle cx="125" cy="97" r="6" fill="#e62e38"/>
+        <rect x="100" y="145" width="300" height="45" rx="8" fill="#fff1f2" stroke="#e62e38" stroke-width="2"/>
+        <circle cx="125" cy="167" r="6" fill="#e62e38"/>
+        <rect x="100" y="215" width="300" height="45" rx="8" fill="#fff1f2" stroke="#e62e38" stroke-width="2"/>
+        <circle cx="125" cy="237" r="6" fill="#e62e38"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- سرویس‌ها -->
+<section id="services">
+  <div class="container">
+    <div class="section-header">
+      <h2>سرویس‌های میزبانی و هاستینگ</h2>
+      <p>زیرساخت‌های پایدار ابری با سریع‌ترین درایوهای NVMe</p>
+    </div>
+
+    <div class="grid-4">
+      {% for service in site.data.services %}
+      <article class="card">
+        <div class="card-icon">{{ service.icon }}</div>
+        <h3>{{ service.title }}</h3>
+        <p>{{ service.desc }}</p>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- مزایا -->
+<section style="background-color: var(--white);" id="features">
+  <div class="container">
+    <div class="section-header">
+      <h2>چرا ۳۶۵وب؟</h2>
+      <p>کیفیت و استانداردهایی که آسودگی خاطر شما را تضمین می‌کنند</p>
+    </div>
+
+    <div class="grid-4">
+      {% for feature in site.data.features %}
+      <div class="card">
+        <div class="card-icon">{{ feature.icon }}</div>
+        <h3>{{ feature.title }}</h3>
+        <p>{{ feature.desc }}</p>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- بخش مشتریان -->
+<section class="clients-section">
+  <div class="container">
+    <div class="section-header" style="margin-bottom: 30px;">
+      <h2>به ما اعتماد کرده‌اند!</h2>
+      <p>میزبانی مطمئن صدها کسب‌وکار، مدارس و سازمان‌های معتبر</p>
+    </div>
+
+    <div class="clients-grid">
+      {% for client in site.data.clients %}
+      <a href="{{ client.url | default: '#' }}" class="client-badge">
+        <div class="client-logo-wrapper">
+          <img src="{{ '/assets/images/clients/' | append: client.logo | relative_url }}" alt="لوگوی {{ client.name }}" loading="lazy">
+        </div>
+        <span>{{ client.name }}</span>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- مقالات با نمایش تاریخ شمسی و عکس شاخص -->
+<section id="blog">
+  <div class="container">
+    <div class="section-header">
+      <h2>آخرین مطالب وبلاگ</h2>
+      <p>تازه‌ترین آموزش‌های سرور و توسعه وب</p>
+    </div>
+
+    <div class="grid-4">
+      {% for post in site.posts limit:4 %}
+      <article class="blog-card">
+        <div class="blog-thumbnail">
+          {% if post.image %}
+            <img src="{{ post.image | relative_url }}" alt="{{ post.title }}" loading="lazy">
+          {% else %}
+            <svg width="45" height="45" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"></path></svg>
+          {% endif %}
+        </div>
+        <div class="blog-body">
+          <div class="blog-meta">
+            <span class="shamsi-date" data-gdate="{{ post.date | date_to_xmlschema }}">
+              {{ post.date | date: "%Y/%m/%d" }}
+            </span>
+          </div>
+          <h3>{{ post.title }}</h3>
+          <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 12px;">{{ post.excerpt | strip_html | truncatewords: 15 }}</p>
+          <a href="{{ post.url | relative_url }}" class="blog-link">ادامه مطلب ←</a>
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- اسکریپت تبدیل تاریخ میلادی کارت‌ها به شمسی -->
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    document.querySelectorAll('.shamsi-date').forEach(function(el) {
+      const gDateStr = el.getAttribute('data-gdate');
+      if (gDateStr) {
+        try {
+          const d = new Date(gDateStr);
+          const formatter = new Intl.DateTimeFormat('fa-IR', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+          });
+          el.textContent = formatter.format(d);
+        } catch (e) {
+          // در صورت خطا تاریخ پیش‌فرض حفظ می‌شود
+        }
+      }
+    });
+  });
+</script>

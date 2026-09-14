@@ -1,0 +1,54 @@
+---
+layout: default
+---
+
+<section style="background: radial-gradient(circle at top right, #fff1f2 0%, #f1f4fc 55%, #ffffff 100%); padding: 50px 0 40px; border-bottom: 1px solid var(--border); text-align: center;">
+  <div class="container">
+    <span style="background: #fee2e2; color: var(--brand-red); font-size: 0.85rem; font-weight: 700; padding: 4px 14px; border-radius: 20px; display: inline-block; margin-bottom: 12px;">
+      دسته‌بندی مقالات
+    </span>
+    <h1 style="font-size: 1.85rem; margin-bottom: 10px; color: var(--brand-navy);">{{ page.category_title }}</h1>
+    <p style="color: var(--text-muted); font-size: 0.95rem; max-width: 600px; margin: 0 auto;">{{ page.category_desc }}</p>
+  </div>
+</section>
+
+<section style="padding: 60px 0; min-height: 50vh;">
+  <div class="container">
+    <div class="grid-4" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 25px;">
+      {% assign target_cat = page.category_slug %}
+      {% assign found_posts = false %}
+
+      {% for post in site.posts %}
+        {% if post.categories contains target_cat %}
+          {% assign found_posts = true %}
+          <div class="blog-card" style="background: var(--white); border-radius: var(--radius); overflow: hidden; border: 1px solid var(--border); box-shadow: var(--shadow-sm); display: flex; flex-direction: column;">
+            <div class="blog-thumbnail" style="height: 180px; background: linear-gradient(135deg, var(--brand-navy), #0b1129); display: flex; align-items: center; justify-content: center; color: var(--brand-yellow); overflow: hidden;">
+              {% if post.image %}
+                <img src="{{ post.image | relative_url }}" alt="{{ post.title }}" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy">
+              {% else %}
+                <span style="font-size: 2.5rem;">📄</span>
+              {% endif %}
+            </div>
+            <div class="blog-body" style="padding: 20px; flex: 1; display: flex; flex-direction: column;">
+              <span style="font-size: 0.8rem; color: var(--brand-red); font-weight: 700; margin-bottom: 8px;">
+                {{ post.date | date: "%Y/%m/%d" }}
+              </span>
+              <h3 style="font-size: 1.05rem; margin-bottom: 12px; line-height: 1.5;">
+                <a href="{{ post.url | relative_url }}" style="color: var(--brand-navy);">{{ post.title }}</a>
+              </h3>
+              <a href="{{ post.url | relative_url }}" style="margin-top: auto; font-size: 0.88rem; font-weight: 700; color: var(--brand-red);">مطالعه مقاله ←</a>
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+
+      {% unless found_posts %}
+        <p style="text-align: center; grid-column: 1 / -1; color: var(--text-muted);">مقاله‌ای در این دسته‌بندی یافت نشد.</p>
+      {% endunless %}
+    </div>
+
+    <div style="text-align: center; margin-top: 40px;">
+      <a href="{{ '/blog/' | relative_url }}" class="btn btn-primary" style="padding: 10px 24px; font-size: 0.9rem;">بازگشت به همه مقالات وبلاگ</a>
+    </div>
+  </div>
+</section>

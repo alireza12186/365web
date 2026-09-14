@@ -1,0 +1,279 @@
+<header>
+  <div class="container">
+    <div class="nav-wrapper">
+      
+      <!-- لوگو سایت -->
+      <a href="{{ '/' | relative_url }}" class="logo">
+        <img src="{{ '/assets/images/logo.png' | relative_url }}" alt="{{ site.title }}">
+        <span class="logo-text">۳۶۵وب</span>
+      </a>
+
+      <!-- منوی اصلی -->
+      <nav class="nav-menu" id="navMenu">
+        <div class="nav-item">
+          <a href="{{ '/' | relative_url }}" class="nav-link">صفحه اصلی</a>
+        </div>
+        
+        <div class="nav-item dropdown-parent">
+          <a href="#" class="nav-link dropdown-toggle">
+            هاستینگ
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 5px; transition: transform 0.2s;"><path d="M6 9l6 6 6-6"/></svg>
+          </a>
+          <ul class="dropdown-menu">
+            <li><a href="{{ '/linux-cpanel-hosting/' | relative_url }}">هاست لینوکس cPanel</a></li>
+            <li><a href="{{ '/email-hosting/' | relative_url }}">هاست ایمیل ابری</a></li>
+          </ul>
+        </div>
+
+        <div class="nav-item">
+          <a href="{{ '/domain/' | relative_url }}" class="nav-link">ثبت دامنه</a>
+        </div>
+
+        <div class="nav-item">
+          <a href="{{ '/blog/' | relative_url }}" class="nav-link">وبلاگ</a>
+        </div>
+
+        <div class="nav-item">
+          <a href="{{ '/about/' | relative_url }}" class="nav-link">درباره ما</a>
+        </div>
+      </nav>
+
+      <!-- بخش دکمه‌ها و جستجو -->
+      <div class="header-actions">
+        <!-- دکمه باز کردن جستجو -->
+        <button id="openSearchBtn" class="search-trigger-btn" aria-label="جستجو در مقالات">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+        </button>
+
+        <a href="https://my.365web.ir" class="btn btn-primary" target="_blank" rel="noopener">ورود/عضويت</a>
+        <button class="mobile-toggle" id="mobileToggle" aria-label="منوی موبایل">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+      </div>
+
+    </div>
+  </div>
+</header>
+
+<!-- مودال جستجوی بلادرنگ -->
+<div id="searchModal" class="search-modal-overlay">
+  <div class="search-modal-box">
+    <div class="search-modal-header">
+      <div class="search-input-wrapper">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input type="text" id="liveSearchInput" placeholder="عنوان یا کلمه مورد نظر را بنویسید..." autocomplete="off">
+      </div>
+      <button id="closeSearchBtn" class="search-close-btn">&times;</button>
+    </div>
+    
+    <div id="searchResultsList" class="search-results-wrapper">
+      <div class="search-empty-state">عبارت مورد نظر خود را تایپ کنید...</div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .search-trigger-btn {
+    background: #f1f5f9;
+    border: 1px solid var(--border);
+    color: var(--brand-navy);
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .search-trigger-btn:hover {
+    background: #fee2e2;
+    color: var(--brand-red);
+    border-color: #fca5a5;
+  }
+
+  /* استایل پنجره مودال */
+  .search-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(13, 20, 51, 0.65);
+    backdrop-filter: blur(4px);
+    z-index: 99999;
+    display: none;
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: 100px;
+  }
+  .search-modal-overlay.active {
+    display: flex;
+  }
+  .search-modal-box {
+    background: var(--white);
+    width: 90%;
+    max-width: 620px;
+    border-radius: 16px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+    border: 1px solid var(--border);
+    overflow: hidden;
+    animation: dropIn 0.2s ease;
+  }
+  @keyframes dropIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .search-modal-header {
+    display: flex;
+    align-items: center;
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border);
+    gap: 12px;
+  }
+  .search-input-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex: 1;
+  }
+  .search-input-wrapper input {
+    width: 100%;
+    border: none;
+    outline: none;
+    font-size: 1rem;
+    font-family: inherit;
+    color: var(--brand-navy);
+  }
+  .search-close-btn {
+    background: none;
+    border: none;
+    font-size: 1.8rem;
+    cursor: pointer;
+    color: #94a3b8;
+    line-height: 1;
+  }
+  .search-close-btn:hover {
+    color: var(--brand-red);
+  }
+  .search-results-wrapper {
+    max-height: 380px;
+    overflow-y: auto;
+    padding: 12px 0;
+  }
+  .search-empty-state {
+    text-align: center;
+    padding: 30px;
+    color: var(--text-muted);
+    font-size: 0.95rem;
+  }
+  .search-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 20px;
+    border-bottom: 1px solid #f1f5f9;
+    transition: background 0.15s;
+    text-decoration: none;
+  }
+  .search-item:last-child {
+    border-bottom: none;
+  }
+  .search-item:hover {
+    background: #fff1f2;
+  }
+  .search-item-title {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--brand-navy);
+  }
+  .search-item:hover .search-item-title {
+    color: var(--brand-red);
+  }
+  .search-item-meta {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    background: #f1f5f9;
+    padding: 2px 8px;
+    border-radius: 6px;
+    white-space: nowrap;
+    margin-right: 10px;
+  }
+</style>
+
+<script>
+  (function() {
+    let postsData = null;
+    const modal = document.getElementById('searchModal');
+    const openBtn = document.getElementById('openSearchBtn');
+    const closeBtn = document.getElementById('closeSearchBtn');
+    const searchInput = document.getElementById('liveSearchInput');
+    const resultsList = document.getElementById('searchResultsList');
+
+    function openModal() {
+      modal.classList.add('active');
+      searchInput.value = '';
+      resultsList.innerHTML = '<div class="search-empty-state">عبارت مورد نظر خود را تایپ کنید...</div>';
+      setTimeout(() => searchInput.focus(), 50);
+
+      if (!postsData) {
+        fetch('{{ "/search.json" | relative_url }}')
+          .then(res => res.json())
+          .then(data => { postsData = data; })
+          .catch(err => console.error("Error loading search data:", err));
+      }
+    }
+
+    function closeModal() {
+      modal.classList.remove('active');
+    }
+
+    openBtn.addEventListener('click', openModal);
+    closeBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) closeModal();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modal.classList.contains('active')) {
+        closeModal();
+      }
+    });
+
+    searchInput.addEventListener('input', function() {
+      const q = this.value.trim().toLowerCase();
+      if (!q) {
+        resultsList.innerHTML = '<div class="search-empty-state">عبارت مورد نظر خود را تایپ کنید...</div>';
+        return;
+      }
+      if (!postsData) return;
+
+      const filtered = postsData.filter(p => {
+        return p.title.toLowerCase().includes(q) || 
+               p.category.toLowerCase().includes(q);
+      });
+
+      if (filtered.length === 0) {
+        resultsList.innerHTML = '<div class="search-empty-state">مطلبی مطابق با جستجوی شما پیدا نشد.</div>';
+        return;
+      }
+
+      let html = '';
+      filtered.forEach(item => {
+        html += `
+          <a href="${item.url}" class="search-item">
+            <span class="search-item-title">${item.title}</span>
+            <span class="search-item-meta">${item.category ? item.category : 'مقاله'}</span>
+          </a>
+        `;
+      });
+      resultsList.innerHTML = html;
+    });
+  })();
+</script>

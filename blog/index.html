@@ -1,0 +1,93 @@
+---
+layout: default
+title: "وبلاگ و آموزش‌ها"
+paginate: true
+---
+
+<section style="padding: 60px 0;">
+  <div class="container">
+    
+    <div class="section-header">
+      <h2>وبلاگ و مقالات آموزشی</h2>
+      <p>تازه‌ترین آموزش‌های میزبانی وب، سرورهای ابری، لینوکس و امنیت</p>
+    </div>
+
+    <!-- گرید مقالات متقارن -->
+    <div class="grid-4">
+      {% for post in paginator.posts %}
+      <article class="blog-card">
+        <div class="blog-thumbnail">
+          {% if post.image %}
+            <img src="{{ post.image | relative_url }}" alt="{{ post.title }}" loading="lazy">
+          {% else %}
+            <svg width="45" height="45" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+              <path d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"></path>
+            </svg>
+          {% endif %}
+        </div>
+        <div class="blog-body">
+          <div class="blog-meta">
+            <span class="shamsi-date" data-gdate="{{ post.date | date_to_xmlschema }}">
+              {{ post.date | date: "%Y/%m/%d" }}
+            </span>
+          </div>
+          <h3>{{ post.title }}</h3>
+          <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 12px;">
+            {{ post.excerpt | strip_html | truncatewords: 15 }}
+          </p>
+          <a href="{{ post.url | relative_url }}" class="blog-link">ادامه مطلب ←</a>
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+
+    <!-- ناوبری شماره صفحات (Pagination Controls) -->
+    {% if paginator.total_pages > 1 %}
+    <nav class="pagination-wrapper" style="margin-top: 50px; display: flex; justify-content: center; gap: 8px; align-items: center;">
+      
+      <!-- صفحه قبلی -->
+      {% if paginator.previous_page %}
+        <a href="{{ paginator.previous_page_path | relative_url }}" class="pagination-btn">صفحه قبلی</a>
+      {% endif %}
+
+      <!-- شماره صفحات -->
+      {% for page_num in (1..paginator.total_pages) %}
+        {% if page_num == paginator.page %}
+          <span class="pagination-btn active">{{ page_num }}</span>
+        {% elsif page_num == 1 %}
+          <a href="{{ '/blog/' | relative_url }}" class="pagination-btn">{{ page_num }}</a>
+        {% else %}
+          <a href="{{ site.paginate_path | relative_url | replace: ':num', page_num }}" class="pagination-btn">{{ page_num }}</a>
+        {% endif %}
+      {% endfor %}
+
+      <!-- صفحه بعدی -->
+      {% if paginator.next_page %}
+        <a href="{{ paginator.next_page_path | relative_url }}" class="pagination-btn">صفحه بعدی</a>
+      {% endif %}
+
+    </nav>
+    {% endif %}
+
+  </div>
+</section>
+
+<!-- اسکریپت تبدیل تاریخ میلادی کارت‌ها به شمسی -->
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    document.querySelectorAll('.shamsi-date').forEach(function(el) {
+      const gDateStr = el.getAttribute('data-gdate');
+      if (gDateStr) {
+        try {
+          const d = new Date(gDateStr);
+          const formatter = new Intl.DateTimeFormat('fa-IR', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+          });
+          el.textContent = formatter.format(d);
+        } catch (e) {}
+      }
+    });
+  });
+</script>

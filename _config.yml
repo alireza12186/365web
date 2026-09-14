@@ -1,0 +1,23 @@
+title: "۳۶۵وب"
+tagline: "ارائه خدمات هاست، دامنه و طراحی سایت"
+description: "۳۶۵وب ارائه‌دهنده میزبانی وب پرسرعت سی‌پنل و سایبرپنل ایران و آلمان، سرور ابری، ثبت آنی دامنه و طراحی سایت."
+url: "https://365web.ir"
+baseurl: ""
+lang: "fa"
+direction: "rtl"
+permalink: /:slug/
+plugins:
+  - jekyll-paginate
+
+paginate: 30
+paginate_path: "/blog/page:num/"
+
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "default"
+
+telegram_url: "https://t.me/host365web"
+instagram_url: "https://instagram.com/365web.ir"

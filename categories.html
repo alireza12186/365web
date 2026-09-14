@@ -1,0 +1,104 @@
+---
+layout: default
+title: "موضوعات و دسته‌بندی مقالات"
+description: "آرشیو کامل موضوعی مقالات، آموزش‌ها و راهنماهای وبلاگ ۳۶۵وب به تفکیک دسته‌بندی."
+permalink: /categories/
+---
+
+<section style="background: radial-gradient(circle at top right, #fff1f2 0%, #f1f4fc 55%, #ffffff 100%); padding: 50px 0 40px; border-bottom: 1px solid var(--border); text-align: center;">
+  <div class="container">
+    <span style="background: #fee2e2; color: var(--brand-red); font-size: 0.85rem; font-weight: 700; padding: 4px 14px; border-radius: 20px; display: inline-block; margin-bottom: 12px;">
+      راهنمای موضوعی وبلاگ
+    </span>
+    <h1 style="font-size: 2rem; margin-bottom: 10px; color: var(--brand-navy);">دسته‌بندی و موضوعات مقالات</h1>
+    <p style="color: var(--text-muted); font-size: 0.95rem; max-width: 600px; margin: 0 auto;">
+      دسترسی سریع به کلیه آموزش‌های هاستینگ، دامنه، مدیریت سرور و وب‌سایت
+    </p>
+  </div>
+</section>
+
+<section style="padding: 60px 0; min-height: 60vh;">
+  <div class="container" style="max-width: 900px;">
+    
+    {% for category in site.categories %}
+      <div style="background: var(--white); border-radius: var(--radius); padding: 30px; margin-bottom: 30px; border: 1px solid var(--border); box-shadow: var(--shadow-sm);">
+        
+        <h2 style="font-size: 1.4rem; color: var(--brand-navy); margin-bottom: 15px; display: flex; align-items: center; gap: 10px; border-bottom: 2px solid #fee2e2; padding-bottom: 10px;">
+          <span style="color: var(--brand-red);">📁</span> {{ category[0] }}
+          <span style="font-size: 0.85rem; background: #f1f5f9; color: var(--text-muted); padding: 2px 10px; border-radius: 12px; font-weight: normal; margin-right: auto;">
+            {{ category[1] | size }} مقاله
+          </span>
+        </h2>
+
+        <ul style="list-style: none; padding: 0; margin: 0;">
+          {% for post in category[1] %}
+            <li style="padding: 10px 0; border-bottom: 1px dashed var(--border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+              <a href="{{ post.url | relative_url }}" style="color: var(--text-main); font-weight: 500; transition: color 0.2s;" onmouseover="this.style.color='var(--brand-red)'" onmouseout="this.style.color='var(--text-main)'">
+                {{ post.title }}
+              </a>
+              <span class="jdate" data-gdate="{{ post.date | date: '%Y-%m-%d' }}" style="font-size: 0.8rem; color: var(--text-muted); white-space: nowrap;">
+                در حال بارگذاری...
+              </span>
+            </li>
+          {% endfor %}
+        </ul>
+
+      </div>
+    {% endfor %}
+
+  </div>
+</section>
+
+<script>
+  (function() {
+    function gregorianToJalali(gy, gm, gd) {
+      var g_d_m = [0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334];
+      var jy = (gy <= 1600) ? 0 : 979;
+      gy -= (gy <= 1600) ? 621 : 1600;
+      var gy2 = (gm > 2) ? (gy + 1) : gy;
+      var days = (365 * gy) + parseInt((gy2 + 3) / 4) - parseInt((gy2 + 99) / 100) + parseInt((gy2 + 399) / 400) - 80 + gd + g_d_m[gm - 1];
+      jy += 33 * parseInt(days / 12053);
+      days %= 12053;
+      jy += 4 * parseInt(days / 1461);
+      days %= 1461;
+      jy += parseInt((days - 1) / 365);
+      if (days > 0) days = (days - 1) % 365;
+      var jm = (days < 186) ? 1 + parseInt(days / 31) : 7 + parseInt((days - 186) / 30);
+      var jd = 1 + ((days < 186) ? (days % 31) : ((days - 186) % 30));
+      
+      var months = ['فروردین', 'اردیبهشت', 'خرداد', 'تیر', 'مرداد', 'شهریور', 'مهر', 'آبان', 'آذر', 'دی', 'بهمن', 'اسفند'];
+      
+      function toFa(num) {
+        return num.toString().replace(/\d/g, function(d) {
+          return '۰۱۲۳۴۵۶۷۸۹'[d];
+        });
+      }
+      
+      return toFa(jd) + ' ' + months[jm - 1] + ' ' + toFa(jy);
+    }
+
+    function convertDates() {
+      var elements = document.querySelectorAll('.jdate');
+      elements.forEach(function(el) {
+        var gdate = el.getAttribute('data-gdate');
+        if (gdate) {
+          var p = gdate.split('-');
+          if (p.length === 3) {
+            var gy = parseInt(p[0], 10);
+            var gm = parseInt(p[1], 10);
+            var gd = parseInt(p[2], 10);
+            if (!isNaN(gy) && !isNaN(gm) && !isNaN(gd)) {
+              el.textContent = gregorianToJalali(gy, gm, gd);
+            }
+          }
+        }
+      });
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', convertDates);
+    } else {
+      convertDates();
+    }
+  })();
+</script>
